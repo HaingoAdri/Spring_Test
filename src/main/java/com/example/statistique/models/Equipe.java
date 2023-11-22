@@ -66,14 +66,9 @@ public class Equipe {
 
     public Equipe getUneEquipe(EquipeService equipeService, JoueurService joueurService, StatistiqueService statistiqueService) {
         Equipe equipe = equipeService.equipeRepository.findById(this.getId()).orElse(null);
-        int jouer = 0;
         if(equipe != null) {
             equipe.setJoueurs(new Joueur().getListeJoueur(joueurService, statistiqueService, this.getId()));
-            for (Joueur joueur : equipe.getJoueurs()) {
-                jouer += joueur.getStatistique().getMatch_jouer();
-            }
         }
-        equipe.setMatch_jouer(jouer);
         return equipe;
     }
 }

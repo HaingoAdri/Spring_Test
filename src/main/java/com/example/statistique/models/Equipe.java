@@ -69,11 +69,11 @@ public class Equipe {
         int jouer = 0;
         if(equipe != null) {
             equipe.setJoueurs(new Joueur().getListeJoueur(joueurService, statistiqueService, this.getId()));
-            for (Joueur joueur : this.getJoueurs()) {
+            for (Joueur joueur : equipe.getJoueurs()) {
                 jouer += joueur.getStatistique().getMatch_jouer();
             }
         }
-        this.setMatch_jouer(jouer);
+        equipe.setMatch_jouer(jouer);
         return equipe;
     }
 }

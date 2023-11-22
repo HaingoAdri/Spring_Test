@@ -297,15 +297,27 @@ public class Statistique {
         statistique.setTrois_points_reussi(this.getPoints(date, 45, statistiqueService));
         statistique.setPoint_marque(this.getPoints(date, 50, statistiqueService));
         System.out.println("manaraka " + statistique.getPoint_marque() + " et " + statistique.getMatch_jouer());
-        double mpm = (double) (statistique.getPoint_marque() / statistique.getMatch_jouer());
-        double fg = ((double) (statistique.getTirre_reussi() / statistique.getTentative_tirre())) * 100;
-        double pourcentage_trois_points = ((double) (statistique.getTentative_trois_points() / statistique.getTrois_points_reussi()))* 100;
-        double pourcentage_lancers_francs = ((double) (statistique.getLancers_francs_reussi()/ statistique.getTentative_lancers_francs())) * 100;
+        double mpm = this.calcul(statistique.getPoint_marque(), statistique.getMatch_jouer());
+        double fg = this.calcul(statistique.getTirre_reussi(), statistique.getTentative_tirre()) * 100;
+        double pourcentage_trois_points = this.calcul(statistique.getTentative_trois_points(), statistique.getTrois_points_reussi())* 100;
+        double pourcentage_lancers_francs = this.calcul(statistique.getLancers_francs_reussi(), statistique.getTentative_lancers_francs()) * 100;
         statistique.setMoyenne_points_match(mpm);
         statistique.setPourc_reussite_tirs_au_but(fg);
         statistique.setPourc_reussite_trois_points(pourcentage_trois_points);
         statistique.setPourc_lancers_francs(pourcentage_lancers_francs);
         return statistique;
+    }
+
+    public double calcul(int a, int b) {
+        double reponse = 0;
+        try {
+            reponse = (double) a / b;
+            return reponse;
+        } catch (ArithmeticException e) {
+            return 0;
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
 }

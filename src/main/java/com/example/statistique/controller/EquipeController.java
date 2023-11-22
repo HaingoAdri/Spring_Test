@@ -21,7 +21,11 @@ public class EquipeController {
 
     @GetMapping("/listeEquipe")
     public List<Equipe> getListeEquipes() {
-        return new Equipe().listeEquipe(this.equipeService);
+        List<Equipe> liste = new Equipe().listeEquipe(this.equipeService);
+        for (Equipe equipe : liste) {
+            equipe = equipe.getUneEquipe(this.equipeService, this.joueurService, this.statistiqueService);
+        }
+        return liste;
     }
 
     @GetMapping("/listeJoueur/{idEquipe}")

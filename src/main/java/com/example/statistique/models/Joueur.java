@@ -79,7 +79,6 @@ public class Joueur {
         java.sql.Date sqlDate = new java.sql.Date(date.getTime());
         List<Joueur> listeJoueur = joueurService.joueurRepository.findByIdEquipe(idEquipe);
         for (Joueur joueur : listeJoueur) {
-            System.out.println("equipe: " + idEquipe + "  ++++++++++++++++        joueur: " + joueur.getId() + " *********************************************************");
             joueur.setStatistique(idEquipe, sqlDate, statistiqueService);
         }
         return listeJoueur;
